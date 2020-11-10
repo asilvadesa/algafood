@@ -2,6 +2,7 @@ package com.algaworks.algafood.jpa;
 
 import com.algaworks.algafood.AlgafoodApplication;
 import com.algaworks.algafood.domain.model.Cozinha;
+import com.algaworks.algafood.respository.CozinhaRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -13,16 +14,17 @@ public class CadastroCozinhaMain {
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
-
+        CozinhaRepository
+                repository = applicationContext.getBean(CozinhaRepository
+                .class);
         Cozinha c1 = new Cozinha();
         c1.setNome("Brasileira");
 
         Cozinha c2 = new Cozinha();
         c2.setNome("Japonesa");
 
-        cadastroCozinha.salvar(c1);
-        cadastroCozinha.salvar(c2);
+        repository.salvar(c1);
+        repository.salvar(c2);
 
     }
 }
