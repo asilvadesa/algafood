@@ -14,9 +14,6 @@
 	<name>algafood</name>
 	<description>API de delivery de comida</description>
 
-	<properties>
-		<java.version>11</java.version>
-	</properties>
 
 	<dependencies>
 		<dependency>

@@ -1,28 +1,28 @@
-package com.algaworks.algafood.jpa;
+package com.algaworks.algafood.jpa.restaurante;
 
 import com.algaworks.algafood.AlgafoodApplication;
 import com.algaworks.algafood.domain.model.Cozinha;
+import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.respository.CozinhaRepository;
-import org.apache.catalina.core.ApplicationContext;
+import com.algaworks.algafood.respository.RestauranteRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.util.List;
-
-public class ConsultaCozinhaMain {
+public class BuscarRestauranteMain {
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext =
                 new SpringApplicationBuilder(AlgafoodApplication.class)
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        CozinhaRepository
-                repository = applicationContext.getBean(CozinhaRepository
+        RestauranteRepository
+                repository = applicationContext.getBean(RestauranteRepository
                 .class);
-        List<Cozinha> cozinhas = repository.listar();
-        for (Cozinha cozinha:cozinhas) {
-            System.out.println(cozinha.getNome());
-        }
+
+        Restaurante restaurante = repository.buscar(1L);
+
+        System.out.println(restaurante.getNome());
+
     }
 }
