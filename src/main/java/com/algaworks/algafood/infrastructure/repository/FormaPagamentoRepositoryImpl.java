@@ -1,7 +1,7 @@
 package com.algaworks.algafood.infrastructure.repository;
 
 import com.algaworks.algafood.domain.model.FormaPagamento;
-import com.algaworks.algafood.respository.FormaPagamentoRepository;
+import com.algaworks.algafood.domain.respository.FormaPagamentoRepository;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;

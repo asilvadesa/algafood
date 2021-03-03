@@ -1,7 +1,7 @@
 package com.algaworks.algafood.infrastructure.repository;
 
 import com.algaworks.algafood.domain.model.Cidade;
-import com.algaworks.algafood.respository.CidadeRepository;
+import com.algaworks.algafood.domain.respository.CidadeRepository;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;

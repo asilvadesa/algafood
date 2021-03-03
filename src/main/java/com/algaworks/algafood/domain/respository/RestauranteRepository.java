@@ -1,4 +1,4 @@
-package com.algaworks.algafood.respository;
+package com.algaworks.algafood.domain.respository;
 
 import com.algaworks.algafood.domain.model.Restaurante;
 

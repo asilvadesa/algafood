@@ -1,7 +1,7 @@
 package com.algaworks.algafood.infrastructure.repository;
 
 import com.algaworks.algafood.domain.model.Restaurante;
-import com.algaworks.algafood.respository.RestauranteRepository;
+import com.algaworks.algafood.domain.respository.RestauranteRepository;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;

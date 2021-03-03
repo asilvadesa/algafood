@@ -1,7 +1,7 @@
 package com.algaworks.algafood.infrastructure.repository;
 
 import com.algaworks.algafood.domain.model.Permissao;
-import com.algaworks.algafood.respository.PermissaoRepository;
+import com.algaworks.algafood.domain.respository.PermissaoRepository;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;

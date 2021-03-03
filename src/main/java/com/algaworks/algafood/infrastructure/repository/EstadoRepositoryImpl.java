@@ -1,7 +1,7 @@
 package com.algaworks.algafood.infrastructure.repository;
 
 import com.algaworks.algafood.domain.model.Estado;
-import com.algaworks.algafood.respository.EstadoRepository;
+import com.algaworks.algafood.domain.respository.EstadoRepository;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;

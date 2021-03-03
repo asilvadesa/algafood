@@ -2,7 +2,7 @@ package com.algaworks.algafood.jpa.permissao;
 
 import com.algaworks.algafood.AlgafoodApplication;
 import com.algaworks.algafood.domain.model.Permissao;
-import com.algaworks.algafood.respository.PermissaoRepository;
+import com.algaworks.algafood.domain.respository.PermissaoRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
