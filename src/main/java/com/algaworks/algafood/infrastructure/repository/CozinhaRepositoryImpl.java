@@ -1,7 +1,10 @@
 package com.algaworks.algafood.infrastructure.repository;
 
+import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.respository.CozinhaRepository;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -34,8 +37,12 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
 
     @Override
     @Transactional
-    public void remover(Cozinha cozinha){
-        cozinha = buscar(cozinha.getId());
-        manager.remove(cozinha);
+    public void remover(Long cozinhaId){
+        Cozinha cozinha = buscar(cozinhaId);
+        try {
+            manager.remove(cozinha);
+        }catch (IllegalArgumentException exception){
+            throw new EmptyResultDataAccessException(1);
+        }
     }
 }
