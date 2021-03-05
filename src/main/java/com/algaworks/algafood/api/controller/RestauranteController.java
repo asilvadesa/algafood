@@ -1,9 +1,12 @@
 package com.algaworks.algafood.api.controller;
 
 import com.algaworks.algafood.domain.exception.EntindadeNaoEncontradaException;
+import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.model.Restaurante;
+import com.algaworks.algafood.domain.respository.CozinhaRepository;
 import com.algaworks.algafood.domain.respository.RestauranteRepository;
 import com.algaworks.algafood.domain.service.RestauranteService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/restaurantes")
 public class RestauranteController {
+
+    @Autowired
+    private CozinhaRepository cozinhaRepository;
 
     @Autowired
     private RestauranteRepository restauranteRepository;
@@ -52,5 +58,18 @@ public class RestauranteController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{restauranteId}")
+    public ResponseEntity<Restaurante> atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante ){
+        Restaurante restauranteAtual = restauranteRepository.buscar(restauranteId);
+        Cozinha cozinhaInformadaNaRequest = cozinhaRepository.buscar(restaurante.getCozinha().getId());
+
+        if (restauranteAtual != null && cozinhaInformadaNaRequest != null){
+            restaurante.setCozinha(cozinhaInformadaNaRequest);
+            BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
+            return ResponseEntity.ok(restauranteAtual);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
