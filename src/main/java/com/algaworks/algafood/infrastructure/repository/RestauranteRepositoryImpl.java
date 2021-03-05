@@ -35,12 +35,11 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
     @Override
     @Transactional
     public void remover(Long restauranteId){
+        Restaurante restaurante = buscar(restauranteId);
         try{
-            Restaurante restaurante = buscar(restauranteId);
             manager.remove(restaurante);
         }catch (IllegalArgumentException exception){
             throw new EmptyResultDataAccessException(1);
         }
-
     }
 }
