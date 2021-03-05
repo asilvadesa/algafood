@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -15,6 +17,8 @@ public class Cidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @NotEmpty
     private String nome;
 
     @ManyToOne
