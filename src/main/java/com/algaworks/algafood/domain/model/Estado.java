@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -16,6 +18,8 @@ public class Estado {
     private Long id;
 
     @Column(nullable = false)
+    @NotNull
+    @NotEmpty
     private String nome;
 
 

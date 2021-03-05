@@ -1,5 +1,6 @@
 package com.algaworks.algafood.infrastructure.repository;
 
+import com.algaworks.algafood.domain.exception.EntindadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Estado;
 import com.algaworks.algafood.domain.respository.EstadoRepository;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,6 @@ import java.util.List;
 
 @Component
 public class EstadoRepositoryImpl implements EstadoRepository {
-
 
     @PersistenceContext
     EntityManager manager;
@@ -29,13 +29,15 @@ public class EstadoRepositoryImpl implements EstadoRepository {
 
     @Override
     public Estado buscar(Long id){
-        return manager.find(Estado.class, id);
+        Estado estado = manager.find(Estado.class, id);
+        if(estado != null) return estado;
+        throw new EntindadeNaoEncontradaException(String.format("Entidade não entrada com esse id: %d", id));
     }
 
     @Override
     @Transactional
-    public void remover(Estado estado){
-        estado = buscar(estado.getId());
+    public void remover(Long estadoId){
+        Estado estado = buscar(estadoId);
         manager.remove(estado);
     }
 }
