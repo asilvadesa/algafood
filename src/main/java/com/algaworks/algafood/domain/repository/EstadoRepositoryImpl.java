@@ -1,4 +1,4 @@
-package com.algaworks.algafood.infrastructure.repository;
+package com.algaworks.algafood.domain.repository;
 
 import com.algaworks.algafood.domain.exception.EntindadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Estado;
@@ -11,30 +11,27 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class EstadoRepositoryImpl implements EstadoRepository {
+public class EstadoRepositoryImpl{
 
     @PersistenceContext
     EntityManager manager;
 
-    @Override
     public List<Estado> listar(){
         return manager.createQuery("from Estado", Estado.class).getResultList();
     }
 
-    @Override
+
     @Transactional
     public Estado salvar(Estado estado){
         return manager.merge(estado);
     }
 
-    @Override
     public Estado buscar(Long id){
         Estado estado = manager.find(Estado.class, id);
         if(estado != null) return estado;
         throw new EntindadeNaoEncontradaException(String.format("Entidade não entrada com esse id: %d", id));
     }
 
-    @Override
     @Transactional
     public void remover(Long estadoId){
         Estado estado = buscar(estadoId);

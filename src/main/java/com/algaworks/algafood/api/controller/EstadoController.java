@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/estados")
@@ -27,15 +29,15 @@ public class EstadoController {
 
     @GetMapping
     public List<Estado> listar(){
-        return estadoRepository.listar();
+        return estadoRepository.findAll();
     }
 
     @GetMapping("/{estadoId}")
     public ResponseEntity<Estado> buscaPorId(@PathVariable Long estadoId){
         try{
-            Estado estado = estadoRepository.buscar(estadoId);
-            return ResponseEntity.ok(estado);
-        } catch (EntindadeNaoEncontradaException exception){
+            Optional<Estado> estado = estadoRepository.findById(estadoId);
+            return ResponseEntity.ok(estado.get());
+        } catch (NoSuchElementException exception){
             return ResponseEntity.notFound().build();
         }
     }
@@ -65,9 +67,9 @@ public class EstadoController {
     @PutMapping("/{estadoId}")
     public ResponseEntity<Estado> atualizar(@PathVariable Long estadoId, @RequestBody Estado estado){
         try{
-            Estado estadoResultadoDaBusca = estadoRepository.buscar(estadoId);
-            BeanUtils.copyProperties(estado, estadoResultadoDaBusca, "id");
-            Estado estadoSalvo = estadoService.salvar(estadoResultadoDaBusca);
+            Optional<Estado> estadoResultadoDaBusca = estadoRepository.findById(estadoId);
+            BeanUtils.copyProperties(estado, estadoResultadoDaBusca.get(), "id");
+            Estado estadoSalvo = estadoService.salvar(estadoResultadoDaBusca.get());
             return ResponseEntity.ok(estadoSalvo);
         }catch (IllegalArgumentException exception){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

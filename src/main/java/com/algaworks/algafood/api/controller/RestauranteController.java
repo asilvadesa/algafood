@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/restaurantes")
@@ -71,10 +72,10 @@ public class RestauranteController {
     @PutMapping("/{restauranteId}")
     public ResponseEntity<Restaurante> atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante ){
         Restaurante restauranteAtual = restauranteRepository.buscar(restauranteId);
-        Cozinha cozinhaInformadaNaRequest = cozinhaRepository.buscar(restaurante.getCozinha().getId());
+        Optional<Cozinha> cozinhaInformadaNaRequest = cozinhaRepository.findById(restaurante.getCozinha().getId());
 
-        if (restauranteAtual != null && cozinhaInformadaNaRequest != null){
-            restaurante.setCozinha(cozinhaInformadaNaRequest);
+        if (restauranteAtual != null && cozinhaInformadaNaRequest.isPresent()){
+            restaurante.setCozinha(cozinhaInformadaNaRequest.get());
             BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
             return ResponseEntity.ok(restauranteAtual);
         }

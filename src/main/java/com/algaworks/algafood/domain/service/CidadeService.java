@@ -9,6 +9,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
+import java.util.Optional;
 
 @Service
 public class CidadeService {
@@ -18,14 +19,14 @@ public class CidadeService {
 
     public Cidade salvar(Cidade cidade) {
         try {
-            return cidadeRepository.salvar(cidade);
+            return cidadeRepository.save(cidade);
         }catch (ConstraintViolationException exception){
             throw new RequisitosNaoAtendidosException(String.format("Parametros obrigatórios não foram atendidos"));
         }
     }
 
     public void remover(Long cidadeId) {
-        Cidade cidade = cidadeRepository.buscar(cidadeId);
-        cidadeRepository.remover(cidade);
+        Optional<Cidade> cidade = cidadeRepository.findById(cidadeId);
+        cidadeRepository.delete(cidade.get());
     }
 }

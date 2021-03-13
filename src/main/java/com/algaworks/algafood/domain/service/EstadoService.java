@@ -15,12 +15,12 @@ public class EstadoService {
     private EstadoRepository estadoRepository;
 
     public Estado salvar(Estado estado) {
-        return estadoRepository.salvar(estado);
+        return estadoRepository.save(estado);
     }
 
     public void deletar(Long estadoId) {
         try {
-            estadoRepository.remover(estadoId);
+            estadoRepository.deleteById(estadoId);
         }catch (IllegalArgumentException exception){
             throw new EntindadeNaoEncontradaException(String.format("Entidade não encontrada com esse id: %d", estadoId));
         } catch (DataIntegrityViolationException exception){
