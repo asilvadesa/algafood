@@ -43,7 +43,7 @@ public class CozinhaControllerTest {
         c1.setId(1L);
         c1.setNome("Brasileira");
 
-        Mockito.when(this.cozinhaRepository.buscar(1L)).thenReturn(c1);
+       // Mockito.when(this.cozinhaRepository.buscar(1L)).thenReturn(c1);
 
         given()
                 .accept(ContentType.JSON)
