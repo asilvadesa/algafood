@@ -69,7 +69,7 @@ public class CozinhaController {
 
     @GetMapping("/por-nome")
     public ResponseEntity<Object> buscarPorNome(String nome){
-        List<Cozinha> byNome = cozinhaRepository.findByNome(nome);
+        List<Cozinha> byNome = cozinhaRepository.findByNomeContaining(nome);
         if(byNome == null || byNome.isEmpty()){
             return ResponseEntity.notFound().build();
         }

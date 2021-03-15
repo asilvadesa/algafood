@@ -16,6 +16,7 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -103,5 +104,14 @@ public class RestauranteController {
         });
     }
 
+    @GetMapping("/buscar-por-nome")
+    public List<Restaurante> buscarPorNomeECozinha(String nome, Long cozinhaId){
+        return restauranteRepository.findByNomeContainsAndCozinhaId(nome, cozinhaId);
+    }
+
+    @GetMapping("taxa-frete")
+    public List<Restaurante> buscarPorTaxa(BigDecimal taxaInicial, BigDecimal taxaFinal){
+        return restauranteRepository.findByTaxaFreteBetween( taxaInicial, taxaFinal);
+    }
 
 }
