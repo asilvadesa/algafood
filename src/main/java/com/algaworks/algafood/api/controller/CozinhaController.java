@@ -75,4 +75,9 @@ public class CozinhaController {
         }
         return ResponseEntity.ok(byNome);
     }
+
+    @GetMapping("/exists")
+    public Boolean verificaSeExiste(String nome){
+        return cozinhaRepository.existsByNome(nome);
+    }
 }

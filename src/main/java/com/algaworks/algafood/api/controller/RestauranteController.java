@@ -114,4 +114,19 @@ public class RestauranteController {
         return restauranteRepository.findByTaxaFreteBetween( taxaInicial, taxaFinal);
     }
 
+    @GetMapping("/primeiro-nome")
+    public Optional<Restaurante> buscarPorPrimeiroNome(String nome){
+        return restauranteRepository.findFirstByNomeContaining(nome);
+    }
+
+    @GetMapping("/top-nome")
+    public List<Restaurante> buscarTop2ListaNomeRestaurante(String nome){
+        return restauranteRepository.findTop2ByNomeContaining(nome);
+    }
+
+    @GetMapping("/count-cozinhas")
+    public int bucarNumeroRestaurantesPorCozinha(Long cozinhaId){
+        return restauranteRepository.countByCozinhaId(cozinhaId);
+    }
+
 }
